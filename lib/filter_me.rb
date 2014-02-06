@@ -2,5 +2,5 @@ module NotifyMe
 	#
 end
 
-require 'notify_me/filter'
-require 'notify_me/version'
+require 'filter_me/filter'
+require 'filter_me/version'

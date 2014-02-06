@@ -1,3 +1,5 @@
+require "forwardable"
+
 require 'filter_me/filter/dsl'
 
 module FilterMe
@@ -10,6 +12,7 @@ module FilterMe
 			end
 
 			def apply_filter(conditions)
+			end
 
 			extend Forwardable
 
@@ -29,4 +32,5 @@ module FilterMe
 
 		def filter(relation)
 		end
+	end
 end

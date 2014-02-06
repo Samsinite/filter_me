@@ -1,7 +1,7 @@
 module FilterMe
 	class Filter
 		class DSL
-			attr_read :filter_class
+			attr_reader :filter_class
 
 			def initialize(filter_class)
 				@filter_class = filter_class
