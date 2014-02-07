@@ -3,4 +3,4 @@ filter_me
 
 A Rails/ActiveRecord filtering gem
 
-### WIP
+### Coming Soon to a application near you!
