@@ -1,18 +1,20 @@
 require "forwardable"
 
+require 'filter_me/filterable'
+require 'filter_me/filter/field_validator'
+require 'filter_me/filter/arel_field_filter'
 require 'filter_me/filter/dsl'
 
 module FilterMe
-	class Filter
+	class ArelFilter
+		include Filterable
 
 		class << self
-			attr_accessor :_fields, :_associations
-
-			def applicable_conditions(params={})
+			def inherited(subclass)
+				subclass._associations = (_associations || {}).dup
 			end
 
-			def apply_filter(conditions)
-			end
+			attr_accessor :_associations, :_model
 
 			extend Forwardable
 
@@ -21,16 +23,18 @@ module FilterMe
 			private
 
 			def dsl
-				@dsl ||= DSL.new(self)
+				@dsl ||= ArelDSL.new(self)
 			end
 		end
 
-		attr_accessor :configuration
+		attr_accessor :configuration, :filters
 
-		def initialize(configuration)
-		end
-
-		def filter(relation)
+		# filters are expected to be an array of arrays where the first value is 
+		# the filter type and the remaining values are the values to filter by. Or if the 
+		# filter type is a relation, the rest are sub filters (sub-array)
+		def initialize(filters, configuration)
+			filters = filters
+			configuration = configuration
 		end
 	end
 end
