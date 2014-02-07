@@ -10,8 +10,9 @@ module FilterMe
 		#   association :account
 		#   association :company, filter_class: SuperDuperCompanyFilter
 		#
-		#   field :name, [:matches]
+		#   field :login, [:matches]
 		#   field :created_at, [:gt, :gteq, :lt, :lteq, :eq]
+		#   field :email, :all
 		#   ...
 		# end
 		###
