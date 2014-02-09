@@ -7,4 +7,4 @@ A Rails/ActiveRecord filtering gem
 
 
 ## License
-Copyright (c) 2013, Filter Me is developed and maintained by Sam Clopton, and is released under the open MIT Licence.
+Copyright (c) 2014, Filter Me is developed and maintained by Sam Clopton, and is released under the open MIT Licence.
