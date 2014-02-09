@@ -27,8 +27,8 @@ module FilterMe
 				@filter_class = filter_class
 			end
 
-			def filter_for(name)
-				"#{name.to_s.singularize.camelize}Filter".constantize
+			def filter_for_name(name)
+				"#{name.to_s.pluralize.camelize}Filter".constantize
 			end
 
 			def field(name, filter_types)
@@ -38,7 +38,7 @@ module FilterMe
 			end
 
 			def association(name, options={})
-				association_filter_class  = options.fetch(:filter_class, filter_for(name))
+				association_filter_class  = options.fetch(:filter_class, filter_for_name(name))
 				configuration = options.fetch(:configuration, {}).merge({:association => model})
 				filter_class._assocations[name] = association_filter_class
 

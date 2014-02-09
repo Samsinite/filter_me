@@ -14,6 +14,10 @@ module FilterMe
 				subclass._associations = (_associations || {}).dup
 			end
 
+			def filter_for(relation)
+				"#{relation.klass.name.pluralize}Filter".constantize
+			end
+
 			attr_accessor :_associations, :_model
 
 			extend Forwardable
