@@ -8,8 +8,7 @@ module FilterMe
 		end
 
 		def build_filter(filter_class)
-			#TODO
-
+			filter_class.new(filter_params, {})
 		end
 
 		# [
