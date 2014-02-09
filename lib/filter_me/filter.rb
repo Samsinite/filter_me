@@ -6,7 +6,7 @@ require 'filter_me/filter/arel_field_filter'
 require 'filter_me/filter/dsl'
 
 module FilterMe
-	class ArelFilter
+	class ActiveRecordFilter
 		include Filterable
 
 		class << self
@@ -29,9 +29,38 @@ module FilterMe
 
 		attr_accessor :configuration, :filters
 
-		# filters are expected to be an array of arrays where the first value is 
+		# Filters are expected to be an array of arrays where the first value is 
 		# the filter type and the remaining values are the values to filter by. Or if the 
-		# filter type is a relation, the rest are sub filters (sub-array)
+		# filter type is a relation, the rest are sub filters (sub-array).
+		#
+		### Ex:
+		# class AccountsFilter < FilterMe::ActiveRecordFilter
+		#   model Account
+		#
+		#   filter :type, [:matches, :eq, :not_eq]
+		# end
+		# class UsersFilter < FilterMe::ActiveRecordFilter
+		#   model User
+		#
+		#   association :account, :filter_class => AccountsFilter
+		#   filter :username, [:matches, :eq, :not_eq]
+		# end
+		#
+		# then the 'filters' param for an initialization of a user filter which would then
+		# filter users by accounts of types that match '%user%' would look like:
+		# [
+		#   # filters on the associaton account
+		#   [:account, [
+		#     [:type, [
+		#       [:matches, ["%paid%"]]
+	    #     ]]
+		#   ]],
+		#   # filters on field username
+		#   [:username, [
+		#     [:eq, ["user1", "user2"]],
+		#     [:matches, ["%company1_%"]]
+		#   ]]
+		# ]
 		def initialize(filters, configuration)
 			filters = filters
 			configuration = configuration
