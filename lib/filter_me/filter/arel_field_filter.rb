@@ -9,11 +9,10 @@ module FilterMe
 			end
 
 			def filter(relation)
-				if validator.valid_fields(filters)
+				if validator.valid_fields?(filters)
 					relation.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
 				else
-					raise "Invalid filter options. The filter fields #{filter_values} do not match the allowed values of #{validator.allowed_fields}"
-				end
+					raise FieldsNotWhiteListedError, "The filter fields #{validator.invalid_fields} are not allowed."
 			end
 
 			private

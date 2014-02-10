@@ -39,7 +39,7 @@ module FilterMe
 
 			def association(name, options={})
 				association_filter_class  = options.fetch(:filter_class, filter_for_name(name))
-				configuration = options.fetch(:configuration, {}).merge({:association => model})
+				configuration = options.fetch(:configuration, {})
 				filter_class._assocations[name] = association_filter_class
 
 				filter(name, association_filter_class, configuration, model)
