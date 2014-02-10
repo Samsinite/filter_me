@@ -1,4 +1,4 @@
-module NotifyMe
+module FilterMe
 	#
 end
 
