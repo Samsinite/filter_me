@@ -44,9 +44,6 @@ module NotifyMe
 	#     account: {type: {eq: "admin"}},
 	#     company: {job: {name: {matches: "%software%"}}}
 	#   }}
-=======
-module FilterMe
->>>>>>> 38e2412a9630209ba5dd39c9dfc756ab9d2691ed
 	#
 	# Instead of Django Tastypie's style (original inspiration):
 	#   [{username__matches: "%sam%"}, {account__type__eq: "admin"}]
@@ -56,7 +53,6 @@ module FilterMe
 		end
 	end
 
-<<<<<<< HEAD
 	def normailize_param(param)
 		param.inject([]) do |filter, (k, v)|
 			filter.push(k)
