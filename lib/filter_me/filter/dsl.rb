@@ -48,7 +48,7 @@ module FilterMe
 			private
 
 			def filter(name, klass, configuration, association = nil)
-				filter_class.send :define_method, name do |relation, filters|
+				filter_class.send(:define_method, name) do |relation, filters|
 					filter = klass.new(filters, configuration)
 
 					if association
