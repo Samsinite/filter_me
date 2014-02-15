@@ -17,6 +17,7 @@ module NotifyMe
 		filter_class.new(filter_params, {})
 	end
 
+	# Normalized Filter params Example:
 	# [
 	#   # filters on the associaton account
 	#   [:account, [
@@ -38,7 +39,7 @@ module NotifyMe
 	#   ]]
 	# ]
 
-	# Filter me ActionController default params (Seems straight forward for Rails):
+	# FilterMe default params example (Seems straight forward for Rails to parse):
 	#   {filters: {
 	#     username: {matches: "sam%", not_in_any: ["sam", "samsinite"]},
 	#     account: {type: {eq: "admin"}},
