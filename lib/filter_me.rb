@@ -1,10 +1,29 @@
+require 'active_support/concern'
+
 require 'filter_me/filter'
 require 'filter_me/version'
 
 module FilterMe
 	class FiltersNotWhiteListedError < StandardError; end
 
-	# extend ActiveSupport::Concern
+	extend ActiveSupport::Concern
+
+	module ClassMethods
+		def normailize_param(param)
+			param.inject([]) do |filter, (k, v)|
+				filter.push(k)
+
+				case v
+				when Hash
+					filter.push(normailize_param(v))
+				when Range
+					filter.push(v)
+				else
+					filter.push([v])
+				end
+			end
+		end
+	end
 
 	def filter_me(relation, filter_class=nil)
 		klass = filter_class || ActiveRecordFilter.filter_for(relation)
@@ -51,21 +70,6 @@ module FilterMe
 	def filter_params
 		params[:filters].inject([]) do |filters, filter_param|
 			filters.push(normailize_param(filter_param))
-		end
-	end
-
-	def normailize_param(param)
-		param.inject([]) do |filter, (k, v)|
-			filter.push(k)
-
-			case v
-			when Hash
-				filter.push(normailize_param(v))
-			when Range
-				filter.push(v)
-			else
-				filter.push([v])
-			end
 		end
 	end
 end
