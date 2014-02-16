@@ -15,6 +15,6 @@ Dir[File.join(File.dirname(__FILE__), 'internal', 'db', "fixtures", "**", '*.rb'
 RSpec.configure do |config|
 	config.use_transactional_fixtures = true
 
-	config.include Fixtures::Users
 	config.include Fixtures::Accounts
+	config.include Fixtures::Users
 end

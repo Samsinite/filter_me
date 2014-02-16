@@ -13,7 +13,7 @@ module FilterMe
 			end
 
 			def filter(relation)
-				relation.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
+				arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) }
 			end
 
 			private
@@ -32,7 +32,11 @@ module FilterMe
 			end
 
 			def arel_table
-				configuration[:model_class].arel_table
+				model_class.arel_table
+			end
+
+			def model_class
+				configuration[:model_class]
 			end
 
 			def validator
@@ -40,7 +44,7 @@ module FilterMe
 			end
 
 			def field
-				configuration[:field]
+				configuration[:field].to_sym
 			end
 		end
 	end

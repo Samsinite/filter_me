@@ -54,12 +54,11 @@ module FilterMe
 				this = self
 				filter_class.send(:define_method, name) do |relation, filters|
 					filter = klass.new(filters, configuration)
-
 					if association
-						relation.joins(this.filter_class._model.name.downcase => klass._model.name.downcase)
-						        .where(filter.filter(relation))
-					else
+						relation = relation.joins(name.to_sym)
 						filter.filter(relation)
+					else
+						relation.where(filter.filter(relation))
 					end
 				end
 			end

@@ -18,6 +18,8 @@ describe FilterMe::Filter::ArelDSL do
 		it "initializes a ArelFieldFilter instance with the values to filter and the filter field configuration" do
 			filters = [:test1, :test2]
 			relation_mock = double("relation")
+			expect(relation_mock).to receive(:where) { |relation| relation }
+			
 			model_mock = double("model")
 
 			FilterMe::Filter::FieldValidator.send(:define_method, "==") do |obj|
@@ -57,6 +59,8 @@ describe FilterMe::Filter::ArelDSL do
 
 		it "calls filter on the initialized ArelFieldFilter instance with the relation" do
 			relation_mock = double("relation")
+			expect(relation_mock).to receive(:where) { |relation| relation }
+
 			model_mock = double("model")
 
 			field_filter_instance = double("field filter instance")
@@ -78,6 +82,7 @@ describe FilterMe::Filter::ArelDSL do
 			dsl.field(:test, [:gt, :lt, :eq])
 
 			filter_instance = filter_class.new
+
 			expect(filter_instance.test(relation_mock, [:test1, :test2])).to eq(relation_mock)
 		end
 	end

@@ -68,48 +68,36 @@ describe FilterMe::Filter::ArelFieldFilter do
 		it "builds the correct arel filter with one filter type of one filter value" do
 			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:lt, [10]]], configuration)
 			relation_mock = double("relation")
-			expect(relation_mock).to receive(:where) do |created_filter|
-				arel_filter = arel_table[field].lt(10)
-				expect(created_filter).to eq(arel_filter)
-			end
 
-			field_filter.filter(relation_mock)
+			arel_filter = arel_table[field].lt(10)
+			expect(field_filter.filter(relation_mock)).to eq(arel_filter)
 		end
 
 		it "builds the correct arel filter with one filter type of two filter values" do
 			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:matches, ["%hi%", "%hey%"]]], configuration)
 			relation_mock = double("relation")
-			expect(relation_mock).to receive(:where) do |created_filter|
-				arel_filter = arel_table[field].matches("%hey%").and(arel_table[field].matches("%hi%"))
-				expect(created_filter).to eq(arel_filter)
-			end
 
-			field_filter.filter(relation_mock)
+			arel_filter = arel_table[field].matches("%hey%").and(arel_table[field].matches("%hi%"))
+			expect(field_filter.filter(relation_mock)).to eq(arel_filter)
 		end
 
 		it "builds the correct arel filter with two filter types of one filter value each" do
 			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:gt, [1]], [:lt, [10]]], configuration)
 			relation_mock = double("relation")
-			expect(relation_mock).to receive(:where) do |created_filter|
-				arel_filter = arel_table[field].lt(10).and(arel_table[field].gt(1))
-				expect(created_filter).to eq(arel_filter)
-			end
 
-			field_filter.filter(relation_mock)
+			arel_filter = arel_table[field].lt(10).and(arel_table[field].gt(1))
+			expect(field_filter.filter(relation_mock)).to eq(arel_filter)
 		end
 
 		it "builds the correct arel filter with two filter types of two filter value each" do
 			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:matches, ["%hi%", "%hey%"]], [:lt, ["z", "Z"]]], configuration)
 			relation_mock = double("relation")
-			expect(relation_mock).to receive(:where) do |created_filter|
-				arel_filter = arel_table[field].lt("Z")
-				                               .and(arel_table[field].lt("z")
-				                               .and(arel_table[field].matches("%hey%")
-				                               .and(arel_table[field].matches("%hi%"))))
-				expect(created_filter).to eq(arel_filter)
-			end
 
-			field_filter.filter(relation_mock)
+			arel_filter = arel_table[field].lt("Z")
+			                               .and(arel_table[field].lt("z")
+			                               .and(arel_table[field].matches("%hey%")
+			                               .and(arel_table[field].matches("%hi%"))))
+			expect(field_filter.filter(relation_mock)).to eq(arel_filter)
 		end
 	end
 end
