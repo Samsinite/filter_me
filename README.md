@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/Samsinite/filter_me.png)](https://codeclimate.com/github/Samsinite/filter_me)
 filter_me
 =========
 
