@@ -8,20 +8,31 @@ module FilterMe
 
 	extend ActiveSupport::Concern
 
-	module ClassMethods
-		def normailize_param(param)
+	class << self
+		def normalize_param(param)
 			param.inject([]) do |filter, (k, v)|
-				filter.push(k)
-
 				case v
 				when Hash
-					filter.push(normailize_param(v))
-				when Range
-					filter.push(v)
+					filter.push([k, FilterMe.normalize_param(v)])
+				when Array
+					filter.push([k, v])
 				else
-					filter.push([v])
+					filter.push([k, [v]])
 				end
 			end
+		end
+	end
+
+	included do
+		if respond_to?(:helper_method)
+			helper_method :filter_me
+		end
+
+		if respond_to?(:hide_action)
+			hide_action :filter_me
+			hide_action :filter_configuration
+			hide_action :build_filter
+			hide_action :filter_params
 		end
 	end
 
@@ -32,8 +43,12 @@ module FilterMe
 		filter.filter(relation)
 	end
 
+	def filter_configuration
+		{}
+	end
+
 	def build_filter(filter_class)
-		filter_class.new(filter_params, {})
+		filter_class.new(filter_params, filter_configuration)
 	end
 
 	# Normalized Filter params Example:
@@ -68,8 +83,6 @@ module FilterMe
 	# Instead of Django Tastypie's style (original inspiration):
 	#   [{username__matches: "%sam%"}, {account__type__eq: "admin"}]
 	def filter_params
-		params[:filters].inject([]) do |filters, filter_param|
-			filters.push(normailize_param(filter_param))
-		end
+		FilterMe.normalize_param(params.fetch(:filters, {}))
 	end
 end

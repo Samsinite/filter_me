@@ -22,12 +22,12 @@ module FilterMe
 
 			extend Forwardable
 
-			def_delegators :dsl, :field, :associaton, :model
+			def_delegators :dsl, :field, :association, :model
 
 			private
 
 			def dsl
-				@dsl ||= ArelDSL.new(self)
+				@dsl ||= Filter::ArelDSL.new(self)
 			end
 		end
 

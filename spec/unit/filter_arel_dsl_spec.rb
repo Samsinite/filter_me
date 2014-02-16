@@ -87,7 +87,7 @@ describe FilterMe::Filter::ArelDSL do
 		model = double("model")
 		filter_class = double("filter_class")
 		filter_class.stub(:_model).and_return(model)
-		filter_class.stub(:_assocations).and_return({})
+		filter_class.stub(:_associations).and_return({})
 		filter_class.should_receive(:define_method) do |name, &block|
 			name.should eq(:some_models)
 			block.should_not be_nil
@@ -131,7 +131,7 @@ describe FilterMe::Filter::ArelDSL do
 			end
 
 			allow(filter_class).to receive(:_model) { model }
-			allow(filter_class).to receive(:_assocations) { {} }
+			allow(filter_class).to receive(:_associations) { {} }
 
 			dsl = FilterMe::Filter::ArelDSL.new(filter_class)
 			dsl.association(:test, {:filter_class => mock_association_filter_class})
@@ -170,7 +170,7 @@ describe FilterMe::Filter::ArelDSL do
 			end
 
 			allow(filter_class).to receive(:_model) { model }
-			allow(filter_class).to receive(:_assocations) { {} }
+			allow(filter_class).to receive(:_associations) { {} }
 
 			dsl = FilterMe::Filter::ArelDSL.new(filter_class)
 			dsl.association(:test, {:filter_class => mock_association_filter_class})
