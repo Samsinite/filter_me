@@ -13,7 +13,9 @@ FilterMe provids helpers and classes that provides filtering using Ruby classes 
 gem "filter_me", "0.1.0"
 ```
 
-## Filter (Subject to change as the API moves closer to 1.0):
+## Filter:
+\* Subject to change as the API moves closer to 1.0)
+
 ``` ruby
     class AccountsFilter < FilterMe::ActiveRecordFilter
       model Account
