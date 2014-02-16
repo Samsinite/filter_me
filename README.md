@@ -8,14 +8,12 @@ filter_me
 FilterMe provids helpers and classes that provides filtering using Ruby classes and object oriented development
 
 ## Installation
-
 ``` ruby
 gem "filter_me", "0.1.0"
 ```
 
 ## Filter:
 \* Subject to change as the API moves closer to 1.0)
-
 ``` ruby
 class AccountsFilter < FilterMe::ActiveRecordFilter
   model Account
@@ -44,7 +42,6 @@ SELECT "accounts".* FROM "accounts" WHERE ("accounts"."type" = "admin")
 ```
 
 ## Nested Filtering:
-
 ``` ruby
 class UsersFilter < FilterMe::ActiveRecordFilter
   model User
