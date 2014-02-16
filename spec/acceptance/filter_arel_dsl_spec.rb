@@ -29,7 +29,10 @@ describe FilterMe::Filter::ArelDSL do
 			field_filter_class = double("field filter class")
 			allow(field_filter_class).to receive(:new) do |filters, configuration|
 				expect(filters).to eq(filters)
-				expect(configuration).to eq({:field => :test, :validator => FilterMe::Filter::FieldValidator.new([:gt, :lt, :eq])})
+				expect(configuration).to eq({
+					:field => :test,
+					:validator => FilterMe::Filter::FieldValidator.new([:gt, :lt, :eq])
+				})
 
 				field_filter_instance
 			end

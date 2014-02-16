@@ -57,7 +57,7 @@ module FilterMe
 		#   [:account, [
 		#     [:type, [
 		#       [:matches, ["%paid%"]]
-	    #     ]]
+		#     ]]
 		#   ]],
 		#   # filters on field username
 		#   [:username, [
