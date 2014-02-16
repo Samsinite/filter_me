@@ -71,7 +71,8 @@ params # => {:filters => {
 ```
 Performs:
 ``` SQL
-SELECT "users".* FROM "users" INNER JOIN "accounts" ON "accounts"."user_id" = "users"."id" WHERE ("users"."email" LIKE '%test.com') AND ("accounts"."cost" < 100000)
+SELECT "users".* FROM "users" INNER JOIN "accounts" ON "accounts"."user_id" = "users"."id"
+    WHERE ("users"."email" LIKE '%test.com') AND ("accounts"."cost" < 100000)
 ```
 
 ## License
