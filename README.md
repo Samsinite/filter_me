@@ -17,61 +17,61 @@ gem "filter_me", "0.1.0"
 \* Subject to change as the API moves closer to 1.0)
 
 ``` ruby
-    class AccountsFilter < FilterMe::ActiveRecordFilter
-      model Account
+class AccountsFilter < FilterMe::ActiveRecordFilter
+  model Account
     
-      field :type, [:matches, :eq, :not_eq]
-      field :cost, [:lt, :gt, :lteq, :gteq, :eq]
-    end
+  field :type, [:matches, :eq, :not_eq]
+  field :cost, [:lt, :gt, :lteq, :gteq, :eq]
+end
     
-    class AccountsController < ApplicationController
-      include FilterMe
+class AccountsController < ApplicationController
+  include FilterMe
       
-      def index
-        @accounts = filter_me(Account.all)
-      end
-    end
+  def index
+    @accounts = filter_me(Account.all)
+  end
+end
 ```
 
 Given a controller that recieves params like the following:
 ``` ruby
-    params # => {filters: {type: {eq: "admin"} } }
+params # => {filters: {type: {eq: "admin"} } }
 ```
 
 The following SQL would be performed (Using ActiveRecord):
 ``` SQL
-    SELECT "accounts".* FROM "accounts" WHERE ("accounts"."type" = "admin")
+SELECT "accounts".* FROM "accounts" WHERE ("accounts"."type" = "admin")
 ```
 
 ## Nested Filtering:
 
 ``` ruby
-    class UsersFilter < FilterMe::ActiveRecordFilter
-      model User
+class UsersFilter < FilterMe::ActiveRecordFilter
+  model User
     
-      association :account, :filter_class => AccountsFilter
-      field :username, [:matches, :eq, :not_eq]
-    end
+  association :account, :filter_class => AccountsFilter
+  field :username, [:matches, :eq, :not_eq]
+end
     
-    class UsersController < ApplicationController
-      include FilterMe
+class UsersController < ApplicationController
+  include FilterMe
       
-      def index
-        @users = filter_me(User.all)
-      end
-    end
+  def index
+    @users = filter_me(User.all)
+  end
+end
 ```
 
 And the following params:
 ``` ruby
-    params # => {:filters => {
-			:email => {:matches => "%test.com"},
-			:account => {:cost => {:lt => 100000}}
-		}}
+params # => {:filters => {
+              :email => {:matches => "%test.com"},
+              :account => {:cost => {:lt => 100000}}
+            }}
 ```
 Performs:
 ``` SQL
-    SELECT "users".* FROM "users" INNER JOIN "accounts" ON "accounts"."user_id" = "users"."id" WHERE ("users"."email" LIKE '%test.com') AND ("accounts"."cost" < 100000)
+SELECT "users".* FROM "users" INNER JOIN "accounts" ON "accounts"."user_id" = "users"."id" WHERE ("users"."email" LIKE '%test.com') AND ("accounts"."cost" < 100000)
 ````
 
 ## License
