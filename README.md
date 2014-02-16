@@ -61,10 +61,7 @@ end
 
 With the following params:
 ``` ruby
-params # => {:filters => {
-#             :email => {:matches => "%test.com"},
-#             :account => {:cost => {:lt => 100000}}
-#           }}
+params # => {:filters => {:email => {:matches => "%test.com"}, :account => {:cost => {:lt => 100000} } } }
 ```
 Performs:
 ``` SQL
