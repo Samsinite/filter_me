@@ -51,7 +51,7 @@ module FilterMe
 		# end
 		#
 		# then the 'filters' param for an initialization of a user filter which would then
-		# filter users by accounts of types that match '%user%' would look like:
+		# filter users by accounts of types that match '%paid%' would look like:
 		# [
 		#   # filters on the associaton account
 		#   [:account, [

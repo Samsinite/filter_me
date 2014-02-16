@@ -4,16 +4,16 @@ module FilterMe
 			attr_accessor :filters, :configuration
 
 			def initialize(filters, configuration)
-				@filter_values = filter_values
+				@filters = filters
 				@configuration = configuration
+
+				unless validator.valid_filters?(filters)
+					raise FiltersNotWhiteListedError, "The filter types #{validator.invalid_filters(filters)} are not allowed."
+				end
 			end
 
 			def filter(relation)
-				if validator.valid_fields?(filters)
-					relation.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
-				else
-					raise FieldsNotWhiteListedError, "The filter fields #{validator.invalid_fields} are not allowed."
-				end
+				relation.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
 			end
 
 			private
@@ -24,7 +24,7 @@ module FilterMe
 
 			def build_filters_from_filter_array(filter_array)
 				type = filter_array[0]
-				filter_array[1..-1].map { |value| build_arel_filter(type, value) }
+				filter_array[1].map { |value| build_arel_filter(type, value) }
 			end
 
 			def build_arel_filter(type, value)

@@ -18,9 +18,10 @@ describe FilterMe::Filter::ArelDSL do
 		it "initializes a ArelFieldFilter instance with the values to filter and the filter field configuration" do
 			filters = [:test1, :test2]
 			relation_mock = double("relation")
+			model_mock = double("model")
 
 			FilterMe::Filter::FieldValidator.send(:define_method, "==") do |obj|
-				obj.whitelisted_fields == self.whitelisted_fields
+				obj.whitelisted_filters == self.whitelisted_filters
 			end
 
 			field_filter_instance = double("field filter instance")
@@ -31,7 +32,8 @@ describe FilterMe::Filter::ArelDSL do
 				expect(filters).to eq(filters)
 				expect(configuration).to eq({
 					:field => :test,
-					:validator => FilterMe::Filter::FieldValidator.new([:gt, :lt, :eq])
+					:validator => FilterMe::Filter::FieldValidator.new([:gt, :lt, :eq]),
+					:model_class => model_mock
 				})
 
 				field_filter_instance
@@ -44,6 +46,8 @@ describe FilterMe::Filter::ArelDSL do
 			filter_class = Class.new do
 			end
 
+			allow(filter_class).to receive(:_model) { model_mock }
+
 			dsl = FilterMe::Filter::ArelDSL.new(filter_class)
 			dsl.field(:test, [:gt, :lt, :eq])
 
@@ -53,6 +57,7 @@ describe FilterMe::Filter::ArelDSL do
 
 		it "calls filter on the initialized ArelFieldFilter instance with the relation" do
 			relation_mock = double("relation")
+			model_mock = double("model")
 
 			field_filter_instance = double("field filter instance")
 			expect(field_filter_instance).to receive(:filter) { |relation| relation }
@@ -66,6 +71,8 @@ describe FilterMe::Filter::ArelDSL do
 			# dynamic filter method can be created.
 			filter_class = Class.new do
 			end
+
+			allow(filter_class).to receive(:_model) { model_mock }
 
 			dsl = FilterMe::Filter::ArelDSL.new(filter_class)
 			dsl.field(:test, [:gt, :lt, :eq])

@@ -1,10 +1,10 @@
 require 'filter_me/filter'
 require 'filter_me/version'
 
-module NotifyMe
-	class FieldsNotWhiteListedError < StandardError; end
+module FilterMe
+	class FiltersNotWhiteListedError < StandardError; end
 
-	extend ActiveSupport::Concern
+	# extend ActiveSupport::Concern
 
 	def filter_me(relation, filter_class=nil)
 		klass = filter_class || ActiveRecordFilter.filter_for(relation)

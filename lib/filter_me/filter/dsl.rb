@@ -35,7 +35,9 @@ module FilterMe
 
 			def field(name, filter_types)
 				field_validator = filter_types == :all ? AllValidator.new : FieldValidator.new(filter_types)
-				filter(name, ArelFieldFilter, {:field => name, :validator => field_validator})
+				filter(name, ArelFieldFilter, { :field => name,
+				                                :validator => field_validator,
+				                                :model_class => self.filter_class._model })
 			end
 
 			def association(name, options={})

@@ -1,27 +1,31 @@
 module FilterMe
 	class Filter
 		class AllValidator
-			def valid_fields(fields)
+			def valid_filters?(filters)
 				true
 			end
 
-			def whitelisted_fields
+			def invalid_filters(filters)
+				[]
+			end
+
+			def whitelisted_filters
 				:all
 			end
 		end
 		class FieldValidator
-			attr_reader :whitelisted_fields
+			attr_reader :whitelisted_filters
 
-			def initialize(whitelisted_fields)
-				@whitelisted_fields = whitelisted_fields
+			def initialize(whitelisted_filters)
+				@whitelisted_filters = whitelisted_filters
 			end
 
-			def valid_fields?(fields)
-				fields.all? { |field| whitelisted_fields.include? field }
+			def valid_filters?(filters)
+				filters.all? { |filter| whitelisted_filters.include? filter[0] }
 			end
 
-			def invalid_fields(fields)
-				fields.select { |field| !(whitelisted_fields.include? field) }
+			def invalid_filters(filters)
+				filters.select { |filter| !(whitelisted_filters.include? filter[0]) }
 			end
 		end
 	end
