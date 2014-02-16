@@ -13,6 +13,7 @@ module FilterMe
 					relation.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
 				else
 					raise FieldsNotWhiteListedError, "The filter fields #{validator.invalid_fields} are not allowed."
+				end
 			end
 
 			private

@@ -22,7 +22,7 @@ module FilterMe
 
 			extend Forwardable
 
-			def_delegators :dsl, :filter
+			def_delegators :dsl, :field, :associaton, :model
 
 			private
 
@@ -41,13 +41,13 @@ module FilterMe
 		# class AccountsFilter < FilterMe::ActiveRecordFilter
 		#   model Account
 		#
-		#   filter :type, [:matches, :eq, :not_eq]
+		#   field :type, [:matches, :eq, :not_eq]
 		# end
 		# class UsersFilter < FilterMe::ActiveRecordFilter
 		#   model User
 		#
 		#   association :account, :filter_class => AccountsFilter
-		#   filter :username, [:matches, :eq, :not_eq]
+		#   field :username, [:matches, :eq, :not_eq]
 		# end
 		#
 		# then the 'filters' param for an initialization of a user filter which would then

@@ -21,10 +21,12 @@ module FilterMe
 
 			extend Forwardable
 
-			def_delegators :filter_class, :model, :model=
-
 			def initialize(filter_class)
 				@filter_class = filter_class
+			end
+
+			def model(klass)
+				@filter_class._model = klass
 			end
 
 			def filter_for_name(name)
@@ -32,17 +34,16 @@ module FilterMe
 			end
 
 			def field(name, filter_types)
-				field_validator = filter_types == all ? AllValidator.new : FieldValidator.new(filter_types)
-				filter(name, ArelFieldFilter, {:field => name, :model_class => model, 
-				                               :validator => field_validator})
+				field_validator = filter_types == :all ? AllValidator.new : FieldValidator.new(filter_types)
+				filter(name, ArelFieldFilter, {:field => name, :validator => field_validator})
 			end
 
 			def association(name, options={})
-				association_filter_class  = options.fetch(:filter_class, filter_for_name(name))
+				association_filter_class  = options.fetch(:filter_class) { filter_for_name(name) }
 				configuration = options.fetch(:configuration, {})
 				filter_class._assocations[name] = association_filter_class
 
-				filter(name, association_filter_class, configuration, model)
+				filter(name, association_filter_class, configuration, filter_class._model)
 			end
 
 			private
@@ -52,7 +53,8 @@ module FilterMe
 					filter = klass.new(filters, configuration)
 
 					if association
-						relation.joins(self.model.name.lowercase => klass.model.name.lowercase).where(filter.filter(relation))
+						relation.joins(self.filter_class._model.name.lowercase => klass._model.name.lowercase)
+						        .where(filter.filter(relation))
 					else
 						filter.filter(relation)
 					end
