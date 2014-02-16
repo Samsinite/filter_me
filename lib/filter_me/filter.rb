@@ -61,8 +61,8 @@ module FilterMe
 		#   ]],
 		#   # filters on field username
 		#   [:username, [
-		#     [:eq, ["user1", "user2"]],
-		#     [:matches, ["%company1_%"]]
+		#     [:not_eq, ["user1", "user2"]],
+		#     [:matches, ["%user_%"]]
 		#   ]]
 		# ]
 		def initialize(filters, configuration)
