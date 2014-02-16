@@ -49,11 +49,12 @@ module FilterMe
 			private
 
 			def filter(name, klass, configuration, association = nil)
+				this = self
 				filter_class.send(:define_method, name) do |relation, filters|
 					filter = klass.new(filters, configuration)
 
 					if association
-						relation.joins(self.filter_class._model.name.lowercase => klass._model.name.lowercase)
+						relation.joins(this.filter_class._model.name.downcase => klass._model.name.downcase)
 						        .where(filter.filter(relation))
 					else
 						filter.filter(relation)
