@@ -62,7 +62,7 @@ class UsersController < ApplicationController
 end
 ```
 
-And the following params:
+With the following params:
 ``` ruby
 params # => {:filters => {
               :email => {:matches => "%test.com"},
@@ -72,7 +72,7 @@ params # => {:filters => {
 Performs:
 ``` SQL
 SELECT "users".* FROM "users" INNER JOIN "accounts" ON "accounts"."user_id" = "users"."id" WHERE ("users"."email" LIKE '%test.com') AND ("accounts"."cost" < 100000)
-````
+```
 
 ## License
 Copyright (c) 2014, Filter Me is developed and maintained by Sam Clopton, and is released under the open MIT Licence.
