@@ -66,8 +66,8 @@ module FilterMe
 		#   ]]
 		# ]
 		def initialize(filters, configuration)
-			filters = filters
-			configuration = configuration
+			@filters = filters
+			@configuration = configuration
 		end
 	end
 end
