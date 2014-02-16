@@ -54,11 +54,11 @@ describe FilterMe::Filter::ArelDSL do
 			filter_instance.test(relation_mock, filters)
 		end
 
-		it "calls filter on the initialized ArelFieldFilter instance with the values to filter and the filter field configuration" do
+		it "calls filter on the initialized ArelFieldFilter instance with the relation" do
 			relation_mock = double("relation")
 
 			field_filter_instance = double("field filter instance")
-			allow(field_filter_instance).to receive(:filter) { |relation| relation }
+			expect(field_filter_instance).to receive(:filter) { |relation| relation }
 
 			field_filter_class = double("field filter class")
 			allow(field_filter_class).to receive(:new) { |filters, configuration| field_filter_instance }
@@ -135,7 +135,7 @@ describe FilterMe::Filter::ArelDSL do
 			filter_instance.test(relation_mock, filters)
 		end
 
-		it "initializes the association filter instance with the values to filter and the filter configuration" do
+		it "calls filter on the association filter instance with the relation" do
 			filters = [:test1, :test2]
 			relation_mock = double("relation")
 			allow(relation_mock).to receive(:joins) { relation_mock }
@@ -153,9 +153,6 @@ describe FilterMe::Filter::ArelDSL do
 			mock_association_filter_class = double("assocation filter class")
 
 			mock_association_filter_class.stub(:new).and_return(mock_association_filter)
-			allow(mock_association_filter_class).to receive(:new) do |filters, configuration| 
-				mock_association_filter 
-			end
 
 			mock_association_filter_class.stub(:_model).and_return(model)
 			allow(mock_association_filter_class).to receive(:define_method) do |name, &block|
