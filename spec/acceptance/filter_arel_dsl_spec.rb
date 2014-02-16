@@ -1,16 +1,10 @@
 require 'spec_helper'
 
-class TestModel; end
-class TestFilter
-	def self._model
-		TestModel
-	end
-end
-
 describe FilterMe::Filter::ArelDSL do
 	it "creates a new arel field filter method named after the field" do
+		model = double("model")
 		filter_class = double("filter_class")
-		filter_class.stub(:_model).and_return(TestModel)
+		filter_class.stub(:_model).and_return(model)
 		filter_class.should_receive(:define_method) do |name, &block|
 			name.should eq(:test)
 			block.should_not be_nil
@@ -80,8 +74,9 @@ describe FilterMe::Filter::ArelDSL do
 
 
 	it "creates a new arel relation filter method named after the association" do
+		model = double("model")
 		filter_class = double("filter_class")
-		filter_class.stub(:_model).and_return(TestModel)
+		filter_class.stub(:_model).and_return(model)
 		filter_class.stub(:_assocations).and_return({})
 		filter_class.should_receive(:define_method) do |name, &block|
 			name.should eq(:some_models)
