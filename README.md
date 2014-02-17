@@ -13,13 +13,13 @@ gem "filter_me", "0.1.0"
 ```
 
 ## Filter:
-\* Subject to change as the API moves closer to 1.0
+\* Highly subject to change as the API moves closer to 1.0
 ``` ruby
 class AccountsFilter < FilterMe::ActiveRecordFilter
   model Account
     
-  field :type, [:matches, :eq, :not_eq]
-  field :cost, [:lt, :gt, :lteq, :gteq, :eq]
+  field :type, [:matches, :eq, :not_eq] # Uses arel, so any Arel::Predications method should work
+  field :cost, [:lt, :gt, :lteq, :gteq, :eq] # Uses arel, so any Arel::Predications method should work
 end
     
 class AccountsController < ApplicationController
@@ -47,7 +47,7 @@ class UsersFilter < FilterMe::ActiveRecordFilter
   model User
     
   association :account, :filter_class => AccountsFilter
-  field :username, [:matches, :eq, :not_eq]
+  field :username, [:matches, :eq, :not_eq] # Uses arel, so any Arel::Predications method should work
 end
     
 class UsersController < ApplicationController
