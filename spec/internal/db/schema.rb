@@ -10,4 +10,16 @@ ActiveRecord::Schema.define do
 		t.integer :cost
 		t.timestamps
 	end
+
+	create_table :companies, :force => true do |t|
+		t.integer :owner_id
+		t.string :name
+		t.timestamps
+	end
+
+	create_table :jobs, :force => true do |t|
+		t.integer :company_id
+		t.string :name
+		t.timestamps
+	end
 end

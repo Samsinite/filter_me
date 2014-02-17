@@ -55,10 +55,11 @@ module FilterMe
 				filter_class.send(:define_method, name) do |relation, filters|
 					filter = klass.new(filters, configuration)
 					if association
-						relation = relation.joins(name.to_sym)
-						filter.filter(relation)
+						relation.joins(name.to_sym).merge(filter.filter(relation))
+						#relation = relation.joins(name.to_sym)
+						#filter.filter(relation)
 					else
-						relation.where(filter.filter(relation))
+						relation.merge(filter.filter(relation))
 					end
 				end
 			end

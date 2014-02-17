@@ -48,4 +48,20 @@ describe UsersFilter do
 			expect(user.account.cost).to be < 100000
 		end
 	end
+
+	it "can do a deeply nested filter" do
+		mock_controller.params = {:filters => {
+			:businesses => {
+				:jobs => {:name => {:matches => "find%"}}
+			}
+		}}
+
+		mock_controller.index.each do |user|
+			user.businesses.each do |business|
+				business.jobs.each do |job|
+					expect(job.name).to start_with "find"
+				end
+			end
+		end
+	end
 end

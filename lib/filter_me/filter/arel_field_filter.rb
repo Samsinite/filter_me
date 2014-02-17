@@ -13,7 +13,7 @@ module FilterMe
 			end
 
 			def filter(relation)
-				arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) }
+				model_class.where(arel_filters.inject { |arel_relation, filter| filter.and(arel_relation) })
 			end
 
 			private

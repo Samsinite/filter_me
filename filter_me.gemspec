@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
 
 	s.add_runtime_dependency     'activerecord', '>= 3.2.0'
 	s.add_runtime_dependency     'activesupport', '>= 3.2.0'
-	#s.add_runtime_dependency     'activemodel', '>= 3.2.0'
 	s.add_development_dependency 'combustion',   '~> 0.5.1'
 	s.add_development_dependency 'rspec-rails',  '~> 2.13'
 	s.add_development_dependency 'sqlite3',      '~> 1.3.7'
