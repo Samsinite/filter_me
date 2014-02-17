@@ -1,4 +1,4 @@
-filter_me
+FilterMe
 =========
 
 [![Build Status](https://travis-ci.org/Samsinite/filter_me.png?branch=master)](https://travis-ci.org/Samsinite/filter_me) [![Code Climate](https://codeclimate.com/github/Samsinite/filter_me.png)](https://codeclimate.com/github/Samsinite/filter_me) [![Gem Version](https://badge.fury.io/rb/filter_me.png)](http://badge.fury.io/rb/filter_me)
