@@ -24,7 +24,7 @@ class AccountsFilter < FilterMe::ActiveRecordFilter
 end
 ```
 
-An example of `field :cost, [:lt]` above would mean that the following method would be called:
+An example of `field :cost, [:lt]` above would mean that the following method could be called:
 `Account.arel_table[:cost].lt(filter_value)`
     
 class AccountsController < ApplicationController
