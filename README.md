@@ -125,8 +125,8 @@ class UsersFilter < FilterMe::ActiveRecordFilter
   model User
   association :account
 
-  field :username, [:matches, :eq, :not_eq, :not_eq_all, :not_eq_any]
-  field :email, [:matches, :eq, :not_eq, :not_eq_all, :not_eq_any]
+  field :username, [:matches, :eq, :not_eq]
+  field :email, [:matches, :eq, :not_eq]
 
   def special_filter(relation, filters)
     relation.where(id: filters)
