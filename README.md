@@ -22,6 +22,9 @@ class AccountsFilter < FilterMe::ActiveRecordFilter
   field :cost, :all
   field :account_type, [:matches] # Symbols are Arel::Predications methods
 end
+```
+
+The `field :cost, [:lt]` means that the account model above should support `Account.arel_table[:cost].lt(filter_value)`.
     
 class AccountsController < ApplicationController
   include FilterMe
