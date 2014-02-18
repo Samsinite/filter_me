@@ -9,7 +9,7 @@ FilterMe provids helpers and classes that makes request filtering easy using Rub
 
 ## Installation
 ``` ruby
-gem "filter_me", "0.1.0"
+gem "filter_me", "0.1.2"
 ```
 
 ## Filter:
