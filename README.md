@@ -28,7 +28,7 @@ An example of `field :cost, [:lt]` above would mean that the following method co
 `Account.arel_table[:cost].lt(filter_value)`
 
 Example Usage:
-```
+``` ruby
 class AccountsController < ApplicationController
   include FilterMe
 
