@@ -91,7 +91,7 @@ describe FilterMe::Filter::ArelFieldFilter do
 		end
 
 		it "builds the correct arel filter with two filter types of one filter value each" do
-			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:gt, [1]], [:lt, [10]]], configuration)
+			field_filter = FilterMe::Filter::ArelFieldFilter.new([["gt", [1]], [:lt, [10]]], configuration)
 			relation_mock = double("relation")
 
 			arel_filter = arel_table[field].lt(10).and(arel_table[field].gt(1))
@@ -103,7 +103,7 @@ describe FilterMe::Filter::ArelFieldFilter do
 		end
 
 		it "builds the correct arel filter with two filter types of two filter value each" do
-			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:matches, ["%hi%", "%hey%"]], [:lt, ["z", "Z"]]], configuration)
+			field_filter = FilterMe::Filter::ArelFieldFilter.new([[:matches, ["%hi%", "%hey%"]], ["lt", ["z", "Z"]]], configuration)
 			relation_mock = double("relation")
 
 			arel_filter = arel_table[field].lt("Z")

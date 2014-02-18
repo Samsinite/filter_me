@@ -8,7 +8,7 @@ module FilterMe
 				@configuration = configuration
 
 				unless validator.valid_filters?(filters)
-					raise FiltersNotWhiteListedError, "The filter types #{validator.invalid_filters(filters)} are not allowed."
+					raise FiltersNotWhiteListedError, "The filter types #{validator.invalid_filters(filters).map { |filter| filter[0] }} are not allowed."
 				end
 			end
 

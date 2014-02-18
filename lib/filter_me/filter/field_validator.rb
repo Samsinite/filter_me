@@ -21,7 +21,7 @@ module FilterMe
 			end
 
 			def valid_filters?(filters)
-				filters.all? { |filter| whitelisted_filters.include? filter[0] }
+				filters.all? { |filter| whitelisted_filters.include?(filter[0]) || whitelisted_filters.include?(filter[0].to_sym) }
 			end
 
 			def invalid_filters(filters)
