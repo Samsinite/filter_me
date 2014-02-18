@@ -68,6 +68,8 @@ Performs:
 SELECT "accounts".* FROM "accounts" WHERE ("accounts"."account_type" LIKE 'paid')
 ```
 
+Brilliant!
+
 ## Nested Filtering:
 ``` ruby
 class UsersFilter < FilterMe::ActiveRecordFilter
