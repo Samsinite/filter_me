@@ -98,6 +98,7 @@ http://0.0.0.0:3000/users.json
     "id":3, "cost":10000, "account_type":"free"
   }}
 ]}
+```
 Performs:
 ``` SQL
 SELECT "users".* FROM "users"
