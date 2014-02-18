@@ -112,7 +112,7 @@ Performs:
 SELECT "users".* FROM "users"
 ```
 
-Now with some filtering:
+Now with some nested filtering:
 http://0.0.0.0:3000/users.json?filters%5Baccount%5D%5Bcost%5D%5Blt%5D=50000
 ``` json
 {"users":[
