@@ -57,7 +57,7 @@ SELECT "accounts".* FROM "accounts"
 ```
 
 Now with some filtering:
-http://0.0.0.0:3000/accounts.json?filters%5Baccount_type%5D%5Bmatches%5D=paid
+http://0.0.0.0:3000/accounts.json?filters%5Baccount_type%5D%5Bmatches%5D=paid , `$.param({filters: {account_type: {matches: "paid"}}})`
 ``` json
 {"accounts":[
   {"id":2, "cost":50000, "account_type":"paid"}
@@ -113,7 +113,7 @@ SELECT "users".* FROM "users"
 ```
 
 Now with some nested filtering:
-http://0.0.0.0:3000/users.json?filters%5Baccount%5D%5Bcost%5D%5Blt%5D=50000, `$.param({filters: {account_type: {matches: "paid"}}})`
+http://0.0.0.0:3000/users.json?filters%5Baccount%5D%5Bcost%5D%5Blt%5D=50000
 ``` json
 {"users":[
   {"id":3, "username":"test3", "email":"test3@spaz.com", "account":{
