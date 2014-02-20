@@ -113,7 +113,7 @@ SELECT "users".* FROM "users"
 ```
 
 Now with some nested filtering:
-http://0.0.0.0:3000/users.json?filters%5Baccount%5D%5Bcost%5D%5Blt%5D=50000
+http://0.0.0.0:3000/users.json?filters%5Baccount%5D%5Bcost%5D%5Blt%5D=50000, `$.param({filters: {account_type: {matches: "paid"}}})`
 ``` json
 {"users":[
   {"id":3, "username":"test3", "email":"test3@spaz.com", "account":{
