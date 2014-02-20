@@ -57,7 +57,7 @@ SELECT "accounts".* FROM "accounts"
 ```
 
 Now with some filtering:
-http://0.0.0.0:3000/accounts.json?filters%5Baccount_type%5D%5Bmatches%5D=paid , `$.param({filters: {account_type: {matches: "paid"}}})`
+http://0.0.0.0:3000/accounts.json?filters%5Baccount_type%5D%5Bmatches%5D=paid, `$.param({filters: {account_type: {matches: "paid"}}})`
 ``` json
 {"accounts":[
   {"id":2, "cost":50000, "account_type":"paid"}
