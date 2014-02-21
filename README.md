@@ -20,7 +20,7 @@ class AccountsFilter < FilterMe::ActiveRecordFilter
   association :user
 
   field :cost, :all
-  field :account_type, [:matches] # Symbols are Arel::Predications methods
+  field :account_type, [:matches]
 end
 ```
 
@@ -76,8 +76,8 @@ class UsersFilter < FilterMe::ActiveRecordFilter
   model User
   association :account # Defaults to AccountsFilter, can override with :filter_class => SomeFilter
 
-  field :username, [:matches, :eq, :not_eq] # Symbols are Arel::Predications methods
-  field :email, [:matches, :eq, :not_eq] # Symbols are Arel::Predications methods
+  field :username, [:matches, :eq, :not_eq]
+  field :email, [:matches, :eq, :not_eq]
 end
     
 class UsersController < ApplicationController
