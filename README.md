@@ -1,8 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/samsinite/filter_me.png?label=ready&title=Ready)](https://waffle.io/samsinite/filter_me)
 FilterMe
 =========
 
-[![Build Status](https://travis-ci.org/Samsinite/filter_me.png?branch=master)](https://travis-ci.org/Samsinite/filter_me) [![Code Climate](https://codeclimate.com/github/Samsinite/filter_me.png)](https://codeclimate.com/github/Samsinite/filter_me) [![Gem Version](https://badge.fury.io/rb/filter_me.png)](http://badge.fury.io/rb/filter_me)
+[![Build Status](https://travis-ci.org/Samsinite/filter_me.png?branch=master)](https://travis-ci.org/Samsinite/filter_me) [![Code Climate](https://codeclimate.com/github/Samsinite/filter_me.png)](https://codeclimate.com/github/Samsinite/filter_me) [![Gem Version](https://badge.fury.io/rb/filter_me.png)](http://badge.fury.io/rb/filter_me) [![Stories in Ready](https://badge.waffle.io/samsinite/filter_me.png?label=ready&title=Ready)](https://waffle.io/samsinite/filter_me)
 
 ### A Rails/ActiveRecord filtering gem
 
