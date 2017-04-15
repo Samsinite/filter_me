@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/samsinite/filter_me.png?label=ready&title=Ready)](https://waffle.io/samsinite/filter_me)
 FilterMe
 =========
 
